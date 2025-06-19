@@ -1,4 +1,4 @@
-const API_URL = "https://todo-app-backend-yo9z.onrender.com/api/todos";
+const API_URL = "https://my-todo-app-r7ut.onrender.com";
 
 const todoForm = document.getElementById("todo-form");
 const todoInput = document.getElementById("todo-input");
