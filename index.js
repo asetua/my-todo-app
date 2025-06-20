@@ -36,7 +36,7 @@ app.get("/api/todos", async (req, res) => {
 app.post("/api/todos", async (req, res) => {
   const { title } = req.body;
   const newTodo = new Todo({ title });
-  await newTodo.save();
+  const savedTodo = await newTodo.save();
   res.status(201).json(savedTodo);
 });
 
