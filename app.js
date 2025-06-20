@@ -11,6 +11,7 @@ async function fetchTodos() {
 
   todoList.innerHTML = "";
   todos.forEach((todo) => {
+    const createdAt = new Date(todo.createdAt).toLocaleString();
     const li = document.createElement("li");
     li.innerHTML = `
       <strong>${todo.title}</strong><br>
