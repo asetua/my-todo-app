@@ -15,14 +15,6 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.note {
-  position: absolute;
-  margin-top: 500px;
-  padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 form {
   display: flex;
   gap: 10px;
