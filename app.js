@@ -13,7 +13,8 @@ async function fetchTodos() {
   todos.forEach((todo) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      ${todo.title}
+      <strong>${todo.title}</strong><br>
+      <small>Created: ${createdAt}</small><br>
       <button onclick="deleteTodo('${todo._id}')">Delete</button>
     `;
     todoList.appendChild(li);
