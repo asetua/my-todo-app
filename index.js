@@ -24,6 +24,11 @@ const todoSchema = new mongoose.Schema({
   title: { type: String, required: true },
   completed: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
+  priority: {
+    type: String,
+    enum: ["Low", "Medium", "High"], // limit to valid values
+    default: "Medium",
+  },
 });
 
 const Todo = mongoose.model("Todo", todoSchema);
@@ -35,10 +40,15 @@ app.get("/api/todos", async (req, res) => {
 });
 
 app.post("/api/todos", async (req, res) => {
-  const { title } = req.body;
-  const newTodo = new Todo({ title });
-  const savedTodo = await newTodo.save();
-  res.status(201).json(savedTodo);
+  try {
+    const { title, priority } = req.body;
+    const newTodo = new Todo({ title, priority });
+    const savedTodo = await newTodo.save();
+    res.status(201).json(savedTodo);
+  } catch (err) {
+    console.error("❌ Error saving todo:", err.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 app.delete("/api/todos/:id", async (req, res) => {

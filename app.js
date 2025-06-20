@@ -2,6 +2,7 @@ const API_URL = "https://my-todo-app-r7ut.onrender.com/api/todos";
 
 const todoForm = document.getElementById("todo-form");
 const todoInput = document.getElementById("todo-input");
+const prioritySelect = document.getElementById("priority-select");
 const todoList = document.getElementById("todo-list");
 
 // Load existing todos
@@ -15,6 +16,13 @@ async function fetchTodos() {
     const li = document.createElement("li");
     li.innerHTML = `
       <strong>${todo.title}</strong><br>
+      <em style="color: ${
+        todo.priority === "High"
+          ? "red"
+          : todo.priority === "Low"
+          ? "green"
+          : "orange"
+      }">[${todo.priority}]</em><br>
       <small>Created: ${createdAt}</small><br>
       <button onclick="deleteTodo('${todo._id}')">Delete</button>
     `;
@@ -26,11 +34,12 @@ async function fetchTodos() {
 todoForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const title = todoInput.value;
+  const priority = prioritySelect.value;
 
   await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title }),
+    body: JSON.stringify({ title, priority }),
   });
 
   todoInput.value = "";
